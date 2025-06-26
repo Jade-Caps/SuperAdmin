@@ -115,11 +115,16 @@ const Sidebar = () => {
                     px={2}
                     py={2}
                 >
-                    {open && <Box sx={{ fontWeight: 600 }}>Admin Panel</Box>}
+                    {open && (
+                        <Box sx={{ fontWeight: 600 }}>
+                            {userType === 'tenant' ? 'User Panel' : 'Admin Panel'}
+                        </Box>
+                    )}
                     <IconButton onClick={toggleDrawer} sx={{ color: 'inherit' }}>
                         <MenuIcon />
                     </IconButton>
                 </Box>
+
 
                 <Divider sx={{ borderColor: 'rgba(255,255,255,0.1)' }} />
 

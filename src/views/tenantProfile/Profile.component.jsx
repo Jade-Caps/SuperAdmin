@@ -116,7 +116,7 @@ const Profile = ({ data, loading, error, onSubmit }) => {
                 }}
             >
                 <Typography variant="h5" gutterBottom>
-                    Tenant Profile
+                    User Profile
                 </Typography>
 
                 {!editMode && !isEmptyProfile ? (

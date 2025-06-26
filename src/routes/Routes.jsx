@@ -12,6 +12,7 @@ import TenantsContainer from '../views/alltenants/Tenant.container';
 
 import RoleContainer from '../views/roles/Role.container';
 import LogContainer from '../views/logs/Log.container';
+import DashboardContainer from '../views/tenatdashboard/Dashboard.container';
 
 
 
@@ -26,6 +27,7 @@ const AppRoutes = () => {
       <Route path="/users/:id" element={<ProtectedRoute><TenantsContainer /></ProtectedRoute>} />
       <Route path ="/roles" element={<ProtectedRoute ><RoleContainer /></ProtectedRoute>} />
       <Route path ="/logs" element={<ProtectedRoute ><LogContainer /></ProtectedRoute>} />
+      <Route path ="/dashboard" element={<ProtectedRoute><DashboardContainer /></ProtectedRoute>} />
 
 
 
