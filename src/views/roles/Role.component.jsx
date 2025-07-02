@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Box,
     Typography,
     CircularProgress,
-    Alert,
     TextField,
     Button,
     Dialog,
@@ -19,8 +18,9 @@ import RoleForm from './components/form';
 import RoleTable from './components/table';
 import { exportToExcel, exportToPDF } from '../../utils/exportUtils';
 import { useTheme } from '@mui/material/styles';
-import { showSuccess, showError } from '../../utils//toastMessage';
-
+import { showSuccess, showError } from '../../utils/toastMessage';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RoleComponent = ({ roles, loading, error, onSubmit }) => {
     const theme = useTheme();
@@ -34,6 +34,13 @@ const RoleComponent = ({ roles, loading, error, onSubmit }) => {
     // Export menu
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+
+    // Show error toast if `error` is passed
+    useEffect(() => {
+        if (error) {
+            showError(error);
+        }
+    }, [error]);
 
     const filteredRoles = roles?.filter(role =>
         role.name.toLowerCase().includes(search.toLowerCase())
@@ -52,8 +59,10 @@ const RoleComponent = ({ roles, loading, error, onSubmit }) => {
 
         if (type === 'excel') {
             exportToExcel(dataToExport, 'Roles_List');
+            showSuccess('Exported to Excel!');
         } else if (type === 'pdf') {
             exportToPDF(['Name', 'CreatedAt'], dataToExport, 'Roles Report');
+            showSuccess('Exported to PDF!');
         }
 
         handleClose();
@@ -107,7 +116,6 @@ const RoleComponent = ({ roles, loading, error, onSubmit }) => {
             </Box>
 
             {loading && <CircularProgress />}
-            {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
 
             <Box mt={2}>
                 <RoleTable roles={paginatedRoles} />
@@ -146,12 +154,23 @@ const RoleComponent = ({ roles, loading, error, onSubmit }) => {
                             }
                         }}
                     />
-
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => setDialogOpen(false)}>Cancel</Button>
                 </DialogActions>
             </Dialog>
+
+            {/* Toast Container */}
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </Box>
     );
 };

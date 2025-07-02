@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Typography,
   Paper,
   CircularProgress,
-  Alert,
   Avatar,
   Divider,
   Grid,
@@ -14,12 +13,21 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const TenantView = ({ tenant, loading, error }) => {
   const theme = useTheme();
   const navigate = useNavigate();
 
   const handleBack = () => navigate(-1);
+
+  // Show error as toast
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   if (loading) {
     return (
@@ -29,19 +37,10 @@ const TenantView = ({ tenant, loading, error }) => {
     );
   }
 
-  if (error) {
-    return (
-      <Box mt={4}>
-        <Alert severity="error">{error}</Alert>
-      </Box>
-    );
-  }
-
   if (!tenant) return null;
 
   return (
     <Box p={3}>
-      {/* Back Button */}
       <Button
         onClick={handleBack}
         startIcon={<ArrowBackIcon />}
@@ -51,7 +50,11 @@ const TenantView = ({ tenant, loading, error }) => {
         Back
       </Button>
 
-      <Typography variant="h4" gutterBottom sx={{ color: theme.palette.text.dark, textAlign: "center" }}>
+      <Typography
+        variant="h4"
+        gutterBottom
+        sx={{ color: theme.palette.text.dark, textAlign: "center" }}
+      >
         User Details
       </Typography>
 
@@ -61,22 +64,16 @@ const TenantView = ({ tenant, loading, error }) => {
           p: 4,
           backgroundColor: theme.palette.background.light,
           color: theme.palette.text.dark,
-          // borderRadius: 3,
         }}
       >
-        {/* Header Section */}
+        {/* Header */}
         <Stack spacing={2} alignItems="center" mb={3}>
           <Box
             sx={{
-              // width: 120,
               height: 120,
-              // borderRadius: '50%',
-              overflow: 'hidden',
-              // border: '2px solid #ccc',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              // backgroundColor: '#fff',
             }}
           >
             <img
@@ -87,10 +84,8 @@ const TenantView = ({ tenant, loading, error }) => {
                 height: '100%',
                 objectFit: 'center',
               }}
-             
             />
           </Box>
-
 
           <Typography variant="h6">{tenant.name}</Typography>
           <Typography>{tenant.email}</Typography>
@@ -105,12 +100,11 @@ const TenantView = ({ tenant, loading, error }) => {
             <Typography variant="subtitle1">Company</Typography>
             <Typography>{tenant.companyName || '-'}</Typography>
           </Grid>
-          <Grid item xs={12} sm={6} >
+          <Grid item xs={12} sm={6}>
             <Typography variant="subtitle1">Designation</Typography>
             <Typography>{tenant.designation || '-'}</Typography>
           </Grid>
         </Grid>
-
 
         <Divider sx={{ my: 3 }} />
 
@@ -122,7 +116,7 @@ const TenantView = ({ tenant, loading, error }) => {
 
         <Divider sx={{ my: 3 }} />
 
-        {/* Subscription */}
+        {/* Subscription Info */}
         <Grid container spacing={2} sx={{ justifyContent: "space-between" }}>
           <Grid item xs={12} sm={4}>
             <Typography variant="subtitle1">Plan</Typography>
@@ -151,7 +145,7 @@ const TenantView = ({ tenant, loading, error }) => {
 
         <Divider sx={{ my: 3 }} />
 
-        {/* DB Info */}
+        {/* Database Info */}
         <Typography variant="subtitle1">Database Info</Typography>
         <Grid container spacing={2} sx={{ justifyContent: "space-between" }}>
           <Grid item xs={6} sm={3}><Typography>Host: {tenant.dbHost}</Typography></Grid>
@@ -180,6 +174,18 @@ const TenantView = ({ tenant, loading, error }) => {
           </Grid>
         </Grid>
       </Paper>
+
+      {/* Toast container for showing toasts */}
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </Box>
   );
 };

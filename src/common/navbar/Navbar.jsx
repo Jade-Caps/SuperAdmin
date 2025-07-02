@@ -34,8 +34,8 @@ const Navbar = () => {
 
   const getUserName = () => {
     return (
+      user?.username ||
       user?.data?.name ||
-      user?.name ||
       user?.email?.split('@')[0] ||
       'Profile'
     );

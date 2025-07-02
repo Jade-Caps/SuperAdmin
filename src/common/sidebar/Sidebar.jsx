@@ -81,11 +81,11 @@ const Sidebar = () => {
             path: userType === 'admin' ? '/profile/admin' : '/profile/user',
             roles: ['admin', 'tenant']
         },
-        {
-            label: 'Security',
-            path: '/settings/security',
-            roles: ['admin', 'tenant']
-        }
+        // {
+        //     label: 'Security',
+        //     path: '/settings/security',
+        //     roles: ['admin', 'tenant']
+        // }
     ];
 
 

@@ -1,10 +1,9 @@
 // src/pages/Log/Log.component.jsx
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
     Box,
     Typography,
     CircularProgress,
-    Alert,
     TextField,
     TablePagination,
     MenuItem,
@@ -14,6 +13,8 @@ import {
     useTheme,
 } from '@mui/material';
 import LogTable from './components/table';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LogComponent = ({ logs, loading, error }) => {
     const [search, setSearch] = useState('');
@@ -22,7 +23,13 @@ const LogComponent = ({ logs, loading, error }) => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
 
-    // Extract unique actions from logs
+    // Show error toast if error exists
+    useEffect(() => {
+        if (error) {
+            toast.error(error);
+        }
+    }, [error]);
+
     const uniqueActions = useMemo(() => {
         const actions = new Set();
         logs?.forEach((log) => {
@@ -31,14 +38,12 @@ const LogComponent = ({ logs, loading, error }) => {
         return ['ALL', ...Array.from(actions)];
     }, [logs]);
 
-    // Filter based on search + action
     const filteredLogs = logs?.filter((log) => {
         const emailMatch = log.userEmail?.toLowerCase().includes(search.toLowerCase());
         const actionMatch = action === 'ALL' || log.action === action;
         return emailMatch && actionMatch;
     });
 
-    // Paginate only if rowsPerPage isn't "All"
     const paginatedLogs =
         rowsPerPage === -1
             ? filteredLogs
@@ -65,7 +70,7 @@ const LogComponent = ({ logs, loading, error }) => {
                     value={search}
                     onChange={(e) => {
                         setSearch(e.target.value);
-                        setPage(0); // Reset page on filter change
+                        setPage(0);
                     }}
                 />
 
@@ -76,12 +81,15 @@ const LogComponent = ({ logs, loading, error }) => {
                         label="Filter by Action"
                         onChange={(e) => {
                             setAction(e.target.value);
-                            setPage(0); // Reset page on filter change
+                            setPage(0);
                         }}
-                       
                     >
                         {uniqueActions.map((act) => (
-                            <MenuItem key={act} value={act}  sx ={{color: theme.palette.text.dark,}}>
+                            <MenuItem
+                                key={act}
+                                value={act}
+                                sx={{ color: theme.palette.text.dark }}
+                            >
                                 {act}
                             </MenuItem>
                         ))}
@@ -90,7 +98,6 @@ const LogComponent = ({ logs, loading, error }) => {
             </Box>
 
             {loading && <CircularProgress />}
-            {error && <Alert severity="error">{error}</Alert>}
 
             {!loading && !error && (
                 <>
@@ -112,7 +119,6 @@ const LogComponent = ({ logs, loading, error }) => {
                             10,
                             25,
                             { label: 'All', value: -1 }
-
                         ]}
                         sx={{
                             color: theme.palette.text.dark,
@@ -122,6 +128,18 @@ const LogComponent = ({ logs, loading, error }) => {
                     />
                 </>
             )}
+
+            {/* Toast Container */}
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </Box>
     );
 };

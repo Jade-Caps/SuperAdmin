@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Box,
     Typography,
@@ -11,7 +11,6 @@ import {
     Paper,
     Button,
     CircularProgress,
-    Alert,
     TablePagination,
     Menu,
     MenuItem
@@ -20,6 +19,8 @@ import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { exportToExcel, exportToPDF } from '../../utils/exportUtils';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const TenantsListComponent = ({ tenants = [], loading, error }) => {
     const navigate = useNavigate();
@@ -51,9 +52,11 @@ const TenantsListComponent = ({ tenants = [], loading, error }) => {
 
         if (type === 'excel') {
             exportToExcel(dataToExport, 'Users_List');
+            toast.success('Exported to Excel successfully!');
         } else if (type === 'pdf') {
-            const columns = ['Name', 'Email', 'Phone', 'CreatedAt' , 'Last Login' , 'Company Name'];
+            const columns = ['Name', 'Email', 'Phone', 'CreatedAt', 'Last Login', 'Company Name'];
             exportToPDF(columns, dataToExport, 'Users Report');
+            toast.success('Exported to PDF successfully!');
         }
 
         handleClose();
@@ -71,18 +74,17 @@ const TenantsListComponent = ({ tenants = [], loading, error }) => {
         page * rowsPerPage + rowsPerPage
     );
 
+    // Show error toast on mount or error change
+    useEffect(() => {
+        if (error) {
+            toast.error(error);
+        }
+    }, [error]);
+
     if (loading) {
         return (
             <Box display="flex" justifyContent="center" mt={4}>
                 <CircularProgress />
-            </Box>
-        );
-    }
-
-    if (error) {
-        return (
-            <Box mt={4}>
-                <Alert severity="error">{error}</Alert>
             </Box>
         );
     }
@@ -182,6 +184,18 @@ const TenantsListComponent = ({ tenants = [], loading, error }) => {
                     />
                 </>
             )}
+
+            {/* Toast notifications */}
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </Box>
     );
 };

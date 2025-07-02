@@ -14,7 +14,7 @@ const DashboardContainer = () => {
     }
   }, [dispatch, profileData]);
 
-  const tenantId = profileData?.name || 'defaultTenantId';
+  const tenantId = profileData?.username || 'defaultTenantId';
 
   return <Dashboard tenantId={tenantId} loading={loading} error={error} />;
 };
