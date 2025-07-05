@@ -13,6 +13,7 @@ import TenantsContainer from '../views/alltenants/Tenant.container';
 import RoleContainer from '../views/roles/Role.container';
 import LogContainer from '../views/logs/Log.container';
 import DashboardContainer from '../views/tenatdashboard/Dashboard.container';
+import NotFound404 from '../views/NotFound/NotFound404';
 
 
 
@@ -28,6 +29,7 @@ const AppRoutes = () => {
       <Route path ="/roles" element={<ProtectedRoute ><RoleContainer /></ProtectedRoute>} />
       <Route path ="/logs" element={<ProtectedRoute ><LogContainer /></ProtectedRoute>} />
       <Route path ="/dashboard" element={<ProtectedRoute><DashboardContainer /></ProtectedRoute>} />
+      <Route path="*" element={<NotFound404 />} />
 
 
 

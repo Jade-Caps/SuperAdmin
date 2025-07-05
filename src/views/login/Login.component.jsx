@@ -203,11 +203,11 @@ const LoginComponent = ({
         </Button>
       </Box>
 
-      <Box mt={1} textAlign="right">
+      {/* <Box mt={1} textAlign="right">
         <Link href="/forgot-password" underline="hover">
           Forgot Password?
         </Link>
-      </Box>
+      </Box> */}
 
       <Divider sx={{ width: '100%', mt: 1, mb: 1 }}>or</Divider>
 

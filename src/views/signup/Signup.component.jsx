@@ -168,7 +168,7 @@ const SignupPage = ({
             </Button>
           </Typography>
           <Typography variant="body2" sx={{ color: '#ff9800' }} mt={1}>
-            Check your spam folder. Verification link expires in 15 minutes.
+           Verification link expires in 15 minutes.
           </Typography>
         </Box>
       )}
