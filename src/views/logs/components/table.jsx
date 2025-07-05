@@ -20,7 +20,7 @@ const LogTable = ({ logs }) => {
             <TableCell>Action</TableCell>
             <TableCell>Tenant ID</TableCell>
             <TableCell>IP Address</TableCell>
-            <TableCell>User Agent</TableCell>
+            {/* <TableCell>User Agent</TableCell> */}
             <TableCell>Date</TableCell>
           </TableRow>
         </TableHead>
@@ -31,9 +31,9 @@ const LogTable = ({ logs }) => {
               <TableCell>{log.action}</TableCell>
               <TableCell>{log.tenantId}</TableCell>
               <TableCell>{log.ipAddress}</TableCell>
-              <TableCell sx={{ maxWidth: 200, overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              {/* <TableCell sx={{ maxWidth: 200, overflow: 'hidden', textOverflow: 'ellipsis' }}>
                 {log.userAgent}
-              </TableCell>
+              </TableCell> */}
               <TableCell>{new Date(log.loggedAt).toLocaleString()}</TableCell>
             </TableRow>
           ))}

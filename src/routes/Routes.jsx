@@ -14,21 +14,28 @@ import RoleContainer from '../views/roles/Role.container';
 import LogContainer from '../views/logs/Log.container';
 import DashboardContainer from '../views/tenatdashboard/Dashboard.container';
 import NotFound404 from '../views/NotFound/NotFound404';
+import Home from '../views/Home/HomePage';
+import { Public } from '@mui/icons-material';
+import PublicRoute from './PublicRoutes';
 
 
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/login" element={<LoginContainer />} />
-      <Route path="/signup" element={<SignupContainer />} />
+      <Route path="/" element={<Home />} />
+
+      <Route
+        path="/login" element={   <PublicRoute>     <LoginContainer />   </PublicRoute> } />
+
+      <Route path="/signup" element={   <PublicRoute>     <SignupContainer />   </PublicRoute> } />
       <Route path="/profile/user" element={<ProtectedRoute>  <ProfileContainer /> </ProtectedRoute>} />
       <Route path="/profile/admin" element={<ProtectedRoute>  <AdminProfileContainer />  </ProtectedRoute>} />
       <Route path="/users" element={<ProtectedRoute>  <TenantsContainer />  </ProtectedRoute>} />
       <Route path="/users/:id" element={<ProtectedRoute><TenantsContainer /></ProtectedRoute>} />
-      <Route path ="/roles" element={<ProtectedRoute ><RoleContainer /></ProtectedRoute>} />
-      <Route path ="/logs" element={<ProtectedRoute ><LogContainer /></ProtectedRoute>} />
-      <Route path ="/dashboard" element={<ProtectedRoute><DashboardContainer /></ProtectedRoute>} />
+      <Route path="/roles" element={<ProtectedRoute ><RoleContainer /></ProtectedRoute>} />
+      <Route path="/logs" element={<ProtectedRoute ><LogContainer /></ProtectedRoute>} />
+      <Route path="/dashboard" element={<ProtectedRoute><DashboardContainer /></ProtectedRoute>} />
       <Route path="*" element={<NotFound404 />} />
 
 

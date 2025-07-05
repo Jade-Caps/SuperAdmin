@@ -71,7 +71,6 @@ import {
   Button,
   Box,
   Divider,
-  Alert,
   Link,
   InputAdornment,
   IconButton
@@ -92,13 +91,11 @@ const LoginComponent = ({
   error,
   successMessage,
   user,
-  unverifiedEmail,
-  onResendVerification
+  unverifiedEmail
 }) => {
   const dispatch = useDispatch();
   const { status, message, error: resendError } = useSelector(state => state.verification);
 
-  // Password visibility toggle state
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
@@ -131,9 +128,17 @@ const LoginComponent = ({
     const normalizedEmail = formData.email.trim().toLowerCase();
     dispatch(resendVerification(normalizedEmail));
   };
-6
+
   const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);
+    setShowPassword(prev => !prev);
+  };
+
+  const autofillFix = {
+    '& input:-webkit-autofill': {
+      boxShadow: '0 0 0 1000px #000 inset',
+      WebkitTextFillColor: '#fff',
+      caretColor: '#fff'
+    }
   };
 
   return (
@@ -144,7 +149,6 @@ const LoginComponent = ({
         Login to Your Account
       </Typography>
 
-      {/* Show resend verification only if error & unverifiedEmail */}
       {error && unverifiedEmail && (
         <Box mt={1}>
           <Typography variant="body2">
@@ -168,6 +172,11 @@ const LoginComponent = ({
         onChange={onChange}
         variant="outlined"
         margin="normal"
+        InputProps={{
+          sx: {
+            ...autofillFix
+          }
+        }}
       />
 
       <TextField
@@ -188,12 +197,14 @@ const LoginComponent = ({
                 edge="end"
                 size="small"
                 sx={{ color: '#ffffff' }}
-
               >
                 {showPassword ? <VisibilityOff /> : <Visibility />}
               </IconButton>
             </InputAdornment>
           ),
+          sx: {
+            ...autofillFix
+          }
         }}
       />
 
@@ -211,15 +222,17 @@ const LoginComponent = ({
 
       <Divider sx={{ width: '100%', mt: 1, mb: 1 }}>or</Divider>
 
-      {/* Uncomment if Google login needed */}
-      {/* <Button 
+      {/* Uncomment this block to enable Google login */}
+      {/* 
+      <Button 
         fullWidth 
         variant="outlined" 
         startIcon={<GoogleIcon />}
         disabled={loading}
       >
         Login with Google
-      </Button> */}
+      </Button> 
+      */}
 
       <Box mt={2}>
         <Typography variant="body2" color="#ffffff">

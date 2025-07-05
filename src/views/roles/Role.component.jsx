@@ -109,8 +109,10 @@ const RoleComponent = ({ roles, loading, error, onSubmit }) => {
                         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
                     >
-                        <MenuItem onClick={() => handleExport('excel')}>Export as Excel</MenuItem>
-                        <MenuItem onClick={() => handleExport('pdf')}>Export as PDF</MenuItem>
+                        <MenuItem onClick={() => handleExport('excel')}
+                        sx={{ color : '#000'}}>Export as Excel</MenuItem>
+                        <MenuItem onClick={() => handleExport('pdf')}
+                        sx={{ color : '#000'}}>Export as PDF</MenuItem>
                     </Menu>
                 </Box>
             </Box>

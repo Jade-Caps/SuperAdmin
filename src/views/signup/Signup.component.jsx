@@ -73,7 +73,7 @@
 
 
 import React, { useEffect, useState } from 'react';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { resendVerification } from '../../api/auth/verificationSlice';
 import {
@@ -85,7 +85,6 @@ import {
   Link,
   InputAdornment,
   IconButton,
-  withTheme,
 } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
@@ -106,13 +105,19 @@ const SignupPage = ({
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
+  const autofillFix = {
+    '& input:-webkit-autofill': {
+      boxShadow: '0 0 0 1000px #000 inset',
+      WebkitTextFillColor: '#fff',
+      caretColor: '#fff',
+    },
+  };
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       onSubmit();
     }
   };
-
 
   const handleResend = () => {
     if (formData.email) {
@@ -128,14 +133,12 @@ const SignupPage = ({
     }
   };
 
-  // Check if we should show the resend option
   const showResendOption =
     successMessage &&
     (successMessage.includes('Verification email') ||
       successMessage.includes('verification') ||
       successMessage.includes('email'));
 
-  // Show toast notifications on success or error
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -168,7 +171,7 @@ const SignupPage = ({
             </Button>
           </Typography>
           <Typography variant="body2" sx={{ color: '#ff9800' }} mt={1}>
-           Verification link expires in 15 minutes.
+             Verification link expires in 15 minutes.
           </Typography>
         </Box>
       )}
@@ -185,6 +188,11 @@ const SignupPage = ({
         error={!!formErrors.username}
         helperText={formErrors.username}
         disabled={loading}
+        InputProps={{
+          sx: {
+            ...autofillFix,
+          },
+        }}
       />
 
       <TextField
@@ -200,6 +208,11 @@ const SignupPage = ({
         error={!!formErrors.email}
         helperText={formErrors.email}
         disabled={loading}
+        InputProps={{
+          sx: {
+            ...autofillFix,
+          },
+        }}
       />
 
       <TextField
@@ -216,7 +229,9 @@ const SignupPage = ({
         helperText={formErrors.password}
         disabled={loading}
         InputProps={{
-          
+          sx: {
+            ...autofillFix,
+          },
           endAdornment: (
             <InputAdornment position="end">
               <IconButton
@@ -224,8 +239,7 @@ const SignupPage = ({
                 onClick={() => setShowPassword(!showPassword)}
                 edge="end"
                 disabled={loading}
-                sx={{ color: '#ffffff' }}  // white icon color
-
+                sx={{ color: '#ffffff' }}
               >
                 {showPassword ? <VisibilityOff /> : <Visibility />}
               </IconButton>
@@ -248,7 +262,8 @@ const SignupPage = ({
 
       <Divider sx={{ width: '100%', mt: 2, mb: 2 }}>or</Divider>
 
-      {/* <Button 
+      {/* 
+      <Button 
         fullWidth 
         variant="outlined" 
         startIcon={<GoogleIcon />}
@@ -256,14 +271,12 @@ const SignupPage = ({
         size="large"
       >
         Sign up with Google
-      </Button> */}
+      </Button> 
+      */}
 
       <Box mt={2}>
         <Typography variant="body2" color="#fff">
           Already have an account?{' '}
-          {/* <Link href="/login" underline="hover">
-            Sign in
-          </Link> */}
           <Button
             color="primary"
             size="small"

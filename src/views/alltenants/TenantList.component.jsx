@@ -118,10 +118,10 @@ const TenantsListComponent = ({ tenants = [], loading, error }) => {
                             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                             transformOrigin={{ vertical: 'top', horizontal: 'right' }}
                         >
-                            <MenuItem onClick={() => handleExport('excel')}>
+                            <MenuItem onClick={() => handleExport('excel')} sx={{color:'#000'}}>
                                 Export as Excel
                             </MenuItem>
-                            <MenuItem onClick={() => handleExport('pdf')}>
+                            <MenuItem onClick={() => handleExport('pdf')} sx={{color: '#000'}}>
                                 Export as PDF
                             </MenuItem>
                         </Menu>

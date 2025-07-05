@@ -1,13 +1,52 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Charset + basic viewport -->
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Title -->
     <title>JadeCaps Superadmin</title>
+
+    <!-- Favicon & Manifest -->
+    <link rel="icon" type="image/png" href="/favicon.ico" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Theme Color (for mobile status bar) -->
+    <meta name="theme-color" content="#214FC6" />
+
+    <!-- SEO Tags -->
+    <meta name="description" content="Manage tenants, owners and properties with JadeCaps Superadmin. Multi-tenant SaaS dashboard." />
+    <meta name="keywords" content="JadeCaps, Superadmin, Dashboard, PMS, Multi-Tenant, SaaS" />
+
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="JadeCaps Superadmin Dashboard" />
+    <meta property="og:description" content="Powerful multi-tenant admin portal for property management." />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="JadeCaps Superadmin Dashboard" />
+    <meta name="twitter:description" content="Powerful multi-tenant admin portal for property management." />
+    <meta name="twitter:image" content="/og-image.png" />
+
+    <!-- Canonical link (SEO best practice) -->
+    <link rel="canonical" href="https://superadmin.jadecaps.com/" />
+
+    <!-- Preconnect to required origins (speeds up fonts, APIs) -->
+    <!-- Example: Google Fonts or your API origin -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" /> -->
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> -->
+
+    <!-- Example: custom web font -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" /> -->
+
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Main script -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

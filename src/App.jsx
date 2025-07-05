@@ -12,30 +12,29 @@ import AppRoutes from './routes/Routes';
 import Footer from './common/footer/Footer';
 
 function App() {
-  // 👇 Example: check token in localStorage
-  // const isLoggedIn = !!localStorage.getItem('token');
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
         <Box sx={{ display: 'flex', minHeight: '100vh', backgroundColor: theme.palette.background.default }}>
-          {/* ✅ Show only when logged in */}
-          { <Sidebar />}
+          {/* Sidebar */}
+          <Sidebar />
 
-          <Box sx={{ flexGrow: 1 }}>
-            {/* ✅ Navbar can also be conditional if needed */}
-            { <Navbar />}
+          {/* Content Area: flex column so footer sticks */}
+          <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+            <Navbar />
 
-            <Box sx={{ mt: 2, px: 3 }}>
+            {/* Page content that expands */}
+            <Box sx={{ flexGrow: 1, mt: 2, px: 3 }}>
               <AppRoutes />
             </Box>
-              <Footer />
+
+            {/* Footer sticks to bottom if content is short */}
+            <Footer />
           </Box>
-        
         </Box>
 
-        {/* ✅ Global Toaster */}
+        {/* Global Toaster */}
         <ToastContainer
           position="top-right"
           autoClose={3000}

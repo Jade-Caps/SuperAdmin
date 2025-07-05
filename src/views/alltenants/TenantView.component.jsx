@@ -5,10 +5,9 @@ import {
   Paper,
   CircularProgress,
   Avatar,
-  Divider,
   Grid,
   Button,
-  Stack
+  Stack,
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
@@ -22,17 +21,14 @@ const TenantView = ({ tenant, loading, error }) => {
 
   const handleBack = () => navigate(-1);
 
-  // Show error as toast
   useEffect(() => {
-    if (error) {
-      toast.error(error);
-    }
+    if (error) toast.error(error);
   }, [error]);
 
   if (loading) {
     return (
-      <Box display="flex" justifyContent="center" mt={4}>
-        <CircularProgress />
+      <Box display="flex" justifyContent="center" mt={8}>
+        <CircularProgress color="primary" />
       </Box>
     );
   }
@@ -40,154 +36,165 @@ const TenantView = ({ tenant, loading, error }) => {
   if (!tenant) return null;
 
   return (
-    <Box p={3}>
+    <Box
+      sx={{
+        background: '#f9f9f9',
+        minHeight: '100vh',
+        p: { xs: 2, md: 4 },
+      }}
+    >
       <Button
         onClick={handleBack}
         startIcon={<ArrowBackIcon />}
         variant="whiteOutlined"
-        sx={{ mb: 2 }}
+        sx={{ mb: 3 }}
       >
         Back
       </Button>
 
-      <Typography
-        variant="h4"
-        gutterBottom
-        sx={{ color: theme.palette.text.dark, textAlign: "center" }}
-      >
-        User Details
-      </Typography>
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={6} md={4}>
+          <InfoCard>
+            <Stack spacing={2} alignItems="center">
+              {tenant.logoURL ? (
+                <Avatar
+                  src={tenant.logoURL}
+                  alt={tenant.name}
+                  sx={{ width: 100, height: 100 }}
+                />
+              ) : (
+                <Avatar sx={{ width: 100, height: 100, fontSize: 40 }}>
+                  {tenant.name ? tenant.name.charAt(0).toUpperCase() : '?'}
+                </Avatar>
+              )}
+              <Typography variant="h6" fontWeight={600}>
+                {tenant.name}
+              </Typography>
+              <Typography variant="body2">{tenant.email}</Typography>
+              <Typography variant="body2">
+                Phone: {tenant.phone || '-'}
+              </Typography>
+            </Stack>
+          </InfoCard>
+        </Grid>
 
-      <Paper
-        elevation={3}
-        sx={{
-          p: 4,
-          backgroundColor: theme.palette.background.light,
-          color: theme.palette.text.dark,
-        }}
-      >
-        {/* Header */}
-        <Stack spacing={2} alignItems="center" mb={3}>
-          <Box
-            sx={{
-              height: 120,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <img
-              src={tenant.logoURL}
-              alt={tenant.name}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'center',
-              }}
+        <Grid item xs={12} sm={6} md={4}>
+          <InfoCard title="Company Details">
+            <InfoRow label="Company" value={tenant.companyName} />
+            <InfoRow label="Designation" value={tenant.designation} />
+          </InfoCard>
+        </Grid>
+
+        <Grid item xs={12} sm={6} md={4}>
+          <InfoCard title="Address">
+            <Typography variant="body2">
+              {tenant.addressLine1}, {tenant.city}, {tenant.state} -{' '}
+              {tenant.postalCode}, {tenant.country}
+            </Typography>
+             <InfoCard title="Database Info">
+           
+            <InfoRow label="Name" value={tenant.dbName} />
+            
+          </InfoCard>
+          </InfoCard>
+         
+        </Grid>
+
+        {/* <Grid item xs={12} sm={6} md={4}>
+          <InfoCard title="Subscription">
+            <InfoRow label="Plan" value={tenant.planType} />
+            <InfoRow label="Status" value={tenant.subscriptionStatus} />
+            <InfoRow
+              label="Ends"
+              value={
+                tenant.subscriptionEndsAt
+                  ? new Date(tenant.subscriptionEndsAt).toLocaleDateString()
+                  : '-'
+              }
             />
-          </Box>
+            {tenant.trialEndsAt && (
+              <InfoRow
+                label="Trial Ends"
+                value={new Date(tenant.trialEndsAt).toLocaleDateString()}
+              />
+            )}
+          </InfoCard>
+        </Grid> */}
 
-          <Typography variant="h6">{tenant.name}</Typography>
-          <Typography>{tenant.email}</Typography>
-          <Typography>Phone: {tenant.phone || '-'}</Typography>
-        </Stack>
+        {/* <Grid item xs={12} sm={6} md={4}>
+          <InfoCard title="Database Info">
+           
+            <InfoRow label="Name" value={tenant.dbName} />
+            
+          </InfoCard>
+        </Grid> */}
 
-        <Divider sx={{ my: 3 }} />
-
-        {/* Personal Info */}
-        <Grid container spacing={2} sx={{ justifyContent: "space-between" }}>
-          <Grid item xs={12} sm={6}>
-            <Typography variant="subtitle1">Company</Typography>
-            <Typography>{tenant.companyName || '-'}</Typography>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Typography variant="subtitle1">Designation</Typography>
-            <Typography>{tenant.designation || '-'}</Typography>
-          </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <InfoCard title="Audit Info">
+            <InfoRow
+              label="Last Login"
+              value={
+                tenant.lastLogin
+                  ? new Date(tenant.lastLogin).toLocaleString()
+                  : '-'
+              }
+            />
+            <InfoRow
+              label="Created At"
+              value={new Date(tenant.createdAt).toLocaleString()}
+            />
+          </InfoCard>
         </Grid>
+      </Grid>
 
-        <Divider sx={{ my: 3 }} />
-
-        {/* Address */}
-        <Typography variant="subtitle1">Address</Typography>
-        <Typography>
-          {tenant.addressLine1}, {tenant.city}, {tenant.state} - {tenant.postalCode}, {tenant.country}
-        </Typography>
-
-        <Divider sx={{ my: 3 }} />
-
-        {/* Subscription Info */}
-        <Grid container spacing={2} sx={{ justifyContent: "space-between" }}>
-          <Grid item xs={12} sm={4}>
-            <Typography variant="subtitle1">Plan</Typography>
-            <Typography>{tenant.planType}</Typography>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Typography variant="subtitle1">Status</Typography>
-            <Typography>{tenant.subscriptionStatus}</Typography>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Typography variant="subtitle1">Ends</Typography>
-            <Typography>
-              {tenant.subscriptionEndsAt
-                ? new Date(tenant.subscriptionEndsAt).toLocaleDateString()
-                : '-'}
-            </Typography>
-          </Grid>
-        </Grid>
-
-        {tenant.trialEndsAt && (
-          <Box mt={1}>
-            <Typography variant="subtitle2">Trial Ends:</Typography>
-            <Typography>{new Date(tenant.trialEndsAt).toLocaleDateString()}</Typography>
-          </Box>
-        )}
-
-        <Divider sx={{ my: 3 }} />
-
-        {/* Database Info */}
-        <Typography variant="subtitle1">Database Info</Typography>
-        <Grid container spacing={2} sx={{ justifyContent: "space-between" }}>
-          <Grid item xs={6} sm={3}><Typography>Host: {tenant.dbHost}</Typography></Grid>
-          <Grid item xs={6} sm={3}><Typography>Port: {tenant.dbPort}</Typography></Grid>
-          <Grid item xs={6} sm={3}><Typography>Name: {tenant.dbName}</Typography></Grid>
-          <Grid item xs={6} sm={3}><Typography>User: {tenant.dbUser}</Typography></Grid>
-        </Grid>
-
-        <Divider sx={{ my: 3 }} />
-
-        {/* Audit Info */}
-        <Grid container spacing={2} sx={{ justifyContent: "space-between" }}>
-          <Grid item xs={12} sm={6}>
-            <Typography variant="subtitle2">Last Login:</Typography>
-            <Typography>
-              {tenant.lastLogin
-                ? new Date(tenant.lastLogin).toLocaleString()
-                : '-'}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Typography variant="subtitle2">Created At:</Typography>
-            <Typography>
-              {new Date(tenant.createdAt).toLocaleString()}
-            </Typography>
-          </Grid>
-        </Grid>
-      </Paper>
-
-      {/* Toast container for showing toasts */}
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+      <ToastContainer position="top-right" autoClose={4000} theme="colored" />
     </Box>
   );
 };
+
+// ✅ Reusable InfoCard
+const InfoCard = ({ children, title }) => {
+  const theme = useTheme();
+  return (
+    <Paper
+      elevation={4}
+      sx={{
+        p: 3,
+        borderRadius: 3,
+        height: '100%',
+        background: theme.palette.background.main,
+        color: theme.palette.text.primary,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 1,
+        transition: 'all 0.3s ease',
+        '&:hover': {
+          transform: 'translateY(-4px)',
+          boxShadow: '0 8px 30px rgba(0,0,0,0.15)',
+        },
+      }}
+    >
+      {title && (
+        <Typography variant="subtitle1" fontWeight={600} mb={1}>
+          {title}
+        </Typography>
+      )}
+      {children}
+    </Paper>
+  );
+};
+
+// ✅ Reusable InfoRow
+const InfoRow = ({ label, value }) => (
+  <Box>
+    <Typography
+      variant="caption"
+      sx={{ display: 'block', opacity: 0.7, mb: 0.5 }}
+    >
+      {label}
+    </Typography>
+    <Typography variant="body2">{value || '-'}</Typography>
+  </Box>
+);
 
 export default TenantView;
