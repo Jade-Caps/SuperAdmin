@@ -1,77 +1,3 @@
-// import React from 'react';
-// import {
-//   Typography,
-//   TextField,
-//   Button,
-//   Box,
-//   Divider
-// } from '@mui/material';
-// import GoogleIcon from '@mui/icons-material/Google';
-// import AuthWrapper from '../../components/authwrapper/Authwrapper';
-
-// const SignupPage = ({
-//   formData,
-//   onChange,
-//   onSubmit,
-//   loading,
-//   error,
-//   successMessage
-// }) => {
-//   return (
-//     <AuthWrapper>
-//       <Typography variant="h6">Create an Account</Typography>
-
-//       <TextField
-//         fullWidth
-//         label="Username"
-//         name="username"
-//         value={formData.username}
-//         onChange={onChange}
-//         variant="outlined"
-//         // margin="normal"
-//       />
-//       <TextField
-//         fullWidth
-//         label="Email"
-//         name="email"
-//         value={formData.email}
-//         onChange={onChange}
-//         variant="outlined"
-//         // margin="normal"
-//       />
-//       <TextField
-//         fullWidth
-//         label="Password"
-//         name="password"
-//         value={formData.password}
-//         onChange={onChange}
-//         type="password"
-//         variant="outlined"
-//         // margin="normal"
-//       />
-
-//       <Box width="100%" mt={2}>
-//         <Button fullWidth variant="contained" onClick={onSubmit} disabled={loading}>
-//           {loading ? 'Registering...' : 'Sign Up'}
-//         </Button>
-//       </Box>
-
-//       {error && <Typography color="error">{error}</Typography>}
-//       {successMessage && <Typography color="success.main">{successMessage}</Typography>}
-
-//       <Divider sx={{ width: '100%', mt: 2, mb: 2 }}>or</Divider>
-
-//       <Button fullWidth variant="outlined" startIcon={<GoogleIcon />}>
-//         Sign up with Google
-//       </Button>
-//     </AuthWrapper>
-//   );
-// };
-
-// export default SignupPage;
-
-
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -107,7 +33,7 @@ const SignupPage = ({
 
   const autofillFix = {
     '& input:-webkit-autofill': {
-      boxShadow: '0 0 0 1000px #000 inset',
+      boxShadow: '0 0 0 1000px #0f2437 inset',
       WebkitTextFillColor: '#fff',
       caretColor: '#fff',
     },
@@ -151,27 +77,27 @@ const SignupPage = ({
   return (
     <AuthWrapper>
       <ToastContainer autoClose={3000} />
-
-      <Typography variant="h6" gutterBottom>
-        Create an Account
+      <Typography variant="h5" fontWeight={700} textAlign="center" mb={1} sx={{ color: '#fff' }}>
+        Create your account
       </Typography>
+     
 
       {successMessage && showResendOption && (
         <Box mt={2}>
-          <Typography variant="body2">
+          <Typography variant="body2" sx={{ color: '#fff' }}>
             Didn't receive the email?
             <Button
               color="primary"
               size="small"
               onClick={handleResend}
               disabled={loading}
-              sx={{ ml: 1, textDecoration: 'underline' }}
+              sx={{ ml: 1, textDecoration: 'underline', color: '#fff' }}
             >
               Resend
             </Button>
           </Typography>
           <Typography variant="body2" sx={{ color: '#ff9800' }} mt={1}>
-             Verification link expires in 15 minutes.
+            Verification link expires in 15 minutes.
           </Typography>
         </Box>
       )}
@@ -188,6 +114,29 @@ const SignupPage = ({
         error={!!formErrors.username}
         helperText={formErrors.username}
         disabled={loading}
+        sx={{
+          '& .MuiOutlinedInput-root': {
+            color: '#fff',
+            '& fieldset': {
+              borderColor: '#fff',
+            },
+            '&:hover fieldset': {
+              borderColor: '#fff',
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: '#fff',
+            },
+          },
+          '& .MuiInputLabel-root': {
+            color: '#fff',
+            '&.Mui-focused': {
+              color: '#fff',
+            },
+          },
+          '& .MuiFormHelperText-root': {
+            color: '#fff',
+          },
+        }}
         InputProps={{
           sx: {
             ...autofillFix,
@@ -208,6 +157,29 @@ const SignupPage = ({
         error={!!formErrors.email}
         helperText={formErrors.email}
         disabled={loading}
+        sx={{
+          '& .MuiOutlinedInput-root': {
+            color: '#fff',
+            '& fieldset': {
+              borderColor: '#fff',
+            },
+            '&:hover fieldset': {
+              borderColor: '#fff',
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: '#fff',
+            },
+          },
+          '& .MuiInputLabel-root': {
+            color: '#fff',
+            '&.Mui-focused': {
+              color: '#fff',
+            },
+          },
+          '& .MuiFormHelperText-root': {
+            color: '#fff',
+          },
+        }}
         InputProps={{
           sx: {
             ...autofillFix,
@@ -228,6 +200,29 @@ const SignupPage = ({
         error={!!formErrors.password}
         helperText={formErrors.password}
         disabled={loading}
+        sx={{
+          '& .MuiOutlinedInput-root': {
+            color: '#fff',
+            '& fieldset': {
+              borderColor: '#fff',
+            },
+            '&:hover fieldset': {
+              borderColor: '#fff',
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: '#fff',
+            },
+          },
+          '& .MuiInputLabel-root': {
+            color: '#fff',
+            '&.Mui-focused': {
+              color: '#fff',
+            },
+          },
+          '& .MuiFormHelperText-root': {
+            color: '#fff',
+          },
+        }}
         InputProps={{
           sx: {
             ...autofillFix,
@@ -239,7 +234,7 @@ const SignupPage = ({
                 onClick={() => setShowPassword(!showPassword)}
                 edge="end"
                 disabled={loading}
-                sx={{ color: '#ffffff' }}
+                sx={{ color: '#fff' }}
               >
                 {showPassword ? <VisibilityOff /> : <Visibility />}
               </IconButton>
@@ -248,41 +243,43 @@ const SignupPage = ({
         }}
       />
 
-      <Box width="100%" mt={2}>
-        <Button
-          fullWidth
-          variant="contained"
-          onClick={onSubmit}
-          disabled={loading}
-          size="large"
-        >
-          {loading ? 'Creating Account...' : 'Sign Up'}
-        </Button>
-      </Box>
+      <Button
+        fullWidth
+        variant="contained"
+        size="large"
+        sx={{ mt: 2, mb: 1, fontWeight: 700, fontSize: '1.1rem', py: 1.2, borderRadius: 2 }}
+        onClick={onSubmit}
+        disabled={loading}
+      >
+        {loading ? 'Creating Account...' : 'Sign Up'}
+      </Button>
 
-      <Divider sx={{ width: '100%', mt: 2, mb: 2 }}>or</Divider>
+      <Divider sx={{ width: '100%', my: 2, '&::before, &::after': { borderColor: '#fff' } }}>
+        <Typography sx={{ color: '#fff' }}>or</Typography>
+      </Divider>
 
-      {/* 
-      <Button 
-        fullWidth 
-        variant="outlined" 
+      {/*
+      <Button
+        fullWidth
+        variant="outlined"
         startIcon={<GoogleIcon />}
         disabled={loading}
         size="large"
+        sx={{ mb: 1 }}
       >
         Sign up with Google
-      </Button> 
+      </Button>
       */}
 
-      <Box mt={2}>
-        <Typography variant="body2" color="#fff">
+      <Box mt={2} width="100%" textAlign="center">
+        <Typography variant="body2" sx={{ color: '#fff' }}>
           Already have an account?{' '}
           <Button
             color="primary"
             size="small"
             onClick={() => navigate('/login')}
             disabled={loading}
-            sx={{ ml: 1, textDecoration: 'underline' }}
+            sx={{ ml: 1, textDecoration: 'underline', fontWeight: 600, color: '#fff' }}
           >
             Sign in
           </Button>

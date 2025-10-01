@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Paper, useTheme } from '@mui/material';
+import { Box, Paper, Typography, useTheme } from '@mui/material';
 import Logo from '../../assets/jadecapslogo.png';
 
 const AuthWrapper = ({ children }) => {
@@ -8,26 +8,27 @@ const AuthWrapper = ({ children }) => {
   return (
     <Box
       sx={{
-        minHeight: '100vh',
+        minHeight: '80vh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: theme.palette.background.default,
         px: 2,
+        py: 4,
       }}
     >
       <Paper
-        elevation={3}
+        elevation={8}
         sx={{
           width: '100%',
-          maxWidth: 400,
-          p: 4,
-          // borderRadius: 4,
+          maxWidth: 420,
+          p: { xs: 4, sm: 6 },
+          borderRadius: 0,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          backgroundColor: theme.palette.background.dark,
-
+          backgroundColor: '#0f2437',
+          boxShadow: '0 12px 40px rgba(15,36,55,0.32)',
           gap: 3,
         }}
       >
@@ -38,11 +39,13 @@ const AuthWrapper = ({ children }) => {
           alt="Company Logo"
           sx={{
             height: 60,
+            mb: 1,
             transition: 'all 0.3s ease-in-out',
-
           }}
         />
-
+        <Typography variant="subtitle1" sx={{ color: '#fff', fontWeight: 600, mb: 2 }}>
+          Welcome to JadeCaps
+        </Typography>
         {/* Dynamic children (e.g., Login or Register Form) */}
         {children}
       </Paper>

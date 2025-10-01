@@ -34,64 +34,64 @@ const Navbar = () => {
 
   return (
     <AppBar
-  position="static"
-  sx={{
-    backgroundColor: theme.palette.background.dark,
-  }}
->
-  <Toolbar
-    sx={{
-      justifyContent: 'space-between',
-      px: 2,
-      py: 1.5, // Add vertical padding instead of fixed height
-    }}
-  >
-    <Box
-      component="img"
-      src={Logo}
-      alt="Jadecaps"
+      position="static"
       sx={{
-        display: 'block',
-        maxHeight: 50, // ensures it stays within the Toolbar’s height
-        cursor: 'pointer',
+        backgroundColor: theme.palette.background.nav,
+        color: theme.palette.text.onNav,
       }}
-      onClick={() => navigate('/')}
-    />
-
-    {!isMobile ? (
-      <DesktopActions
-        user={user}
-        userType={userType}
-        anchorEl={menuAnchor}
-        handleMenuOpen={handleMenuOpen}
-        handleMenuClose={handleMenuClose}
-        handleLogout={handleLogout}
-        navigate={navigate}
-      />
-    ) : (
-      <>
-        <IconButton
+    >
+      <Toolbar
+        sx={{
+          justifyContent: 'space-between',
+          px: 2,
+          py: 1.5,
+        }}
+      >
+        <Box
+          component="img"
+          src={Logo}
+          alt="Jadecaps"
           sx={{
-            color: theme.palette.text.primary,
-            p: 1, // smaller padding for touch target
+            display: 'block',
+            maxHeight: 50,
+            cursor: 'pointer',
           }}
-          onClick={() => setDrawerOpen(true)}
-        >
-          <MenuIcon />
-        </IconButton>
-        <MobileDrawer
-          open={drawerOpen}
-          onClose={() => setDrawerOpen(false)}
-          user={user}
-          userType={userType}
-          handleLogout={handleLogout}
-          navigate={navigate}
+          onClick={() => navigate('/')}
         />
-      </>
-    )}
-  </Toolbar>
-</AppBar>
 
+        {!isMobile ? (
+          <DesktopActions
+            user={user}
+            userType={userType}
+            anchorEl={menuAnchor}
+            handleMenuOpen={handleMenuOpen}
+            handleMenuClose={handleMenuClose}
+            handleLogout={handleLogout}
+            navigate={navigate}
+          />
+        ) : (
+          <>
+            <IconButton
+              sx={{
+                color: theme.palette.text.onNav,
+                p: 1,
+              }}
+              onClick={() => setDrawerOpen(true)}
+            >
+              <MenuIcon />
+            </IconButton>
+            <MobileDrawer
+              open={drawerOpen}
+              onClose={() => setDrawerOpen(false)}
+              user={user}
+              userType={userType}
+              handleLogout={handleLogout}
+              navigate={navigate}
+            />
+          </>
+        )}
+      </Toolbar>
+    </AppBar>
   );
 };
 

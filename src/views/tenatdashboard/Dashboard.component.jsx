@@ -1,5 +1,5 @@
-// src/pages/Dashboard/Dashboard.component.jsx
-import React from 'react';
+// src/views/admindashboard/AdminDashboard.component.jsx
+import React, { useEffect } from 'react';
 import {
   Box,
   Card,
@@ -11,28 +11,37 @@ import {
   useTheme,
   CircularProgress,
 } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = ({ tenantId, loading, error }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const userType = useSelector((state) => state.login.userType);
 
-  const ADMIN_PORTAL_URL = import.meta.env.VITE_ADMIN_PORTAL_URL;
-  const OWNER_PORTAL_URL = import.meta.env.VITE_OWNER_PORTAL_URL;
+  useEffect(() => {
+    if (userType === 'admin') {
+      navigate('/admin-dashboard', { replace: true });
+    }
+  }, [userType, navigate]);
+
+  if (userType !== 'tenant') return null;
+
+  if (loading) return <CircularProgress sx={{ display: 'block', mx: 'auto', mt: 6 }} />;
+  if (error) return <Typography color="error">{error}</Typography>;
 
   const portals = [
     {
       title: 'Admin Portal',
       description: 'Manage properties, bookings, and users',
-      link: `${ADMIN_PORTAL_URL}/${tenantId}/login`,
+      link: `#`,
     },
     {
       title: 'Owner Portal',
       description: 'View your property listings and details',
-      link: `${OWNER_PORTAL_URL}/${tenantId}/login`,
+      link: `#`,
     },
   ];
-
-  if (loading) return <CircularProgress sx={{ display: 'block', mx: 'auto', mt: 6 }} />;
-  if (error) return <Typography color="error">{error}</Typography>;
 
   return (
     <Box
@@ -46,7 +55,7 @@ const Dashboard = ({ tenantId, loading, error }) => {
       <Typography
         variant="h4"
         gutterBottom
-        sx={{ color: theme.palette.text.dark, textAlign: 'center' }}
+        sx={{ color: theme.palette.primary.main, textAlign: 'center', fontWeight: 700 }}
       >
         User Dashboard
       </Typography>
@@ -57,15 +66,20 @@ const Dashboard = ({ tenantId, loading, error }) => {
             <Card
               elevation={3}
               sx={{
-                backgroundColor: theme.palette.background.dark,
+                backgroundColor: theme.palette.background.paper,
                 color: theme.palette.text.primary,
+                minHeight: 140,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
               }}
             >
               <CardContent>
                 <Typography variant="h6" gutterBottom>
                   {portal.title}
                 </Typography>
-                <Typography variant="body2" >
+                <Typography variant="body2">
                   {portal.description}
                 </Typography>
               </CardContent>

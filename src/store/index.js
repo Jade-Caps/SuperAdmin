@@ -8,6 +8,7 @@ import adminProfileReducer from '../api/adminProfile/profileSlice'
 import tenantsReducer from '../api/allTenants/tenantSlice'
 import roleReducer from '../api/roles/roleSlice'
 import logReducer from '../api/logs/logSlice'
+import documentReducer from '../api/document/documentSlice'
 
 
 export const store = configureStore({
@@ -19,6 +20,7 @@ export const store = configureStore({
     adminProfile : adminProfileReducer,
     tenants : tenantsReducer,
     roles :roleReducer,
-    logs : logReducer
+    logs : logReducer,
+    documents : documentReducer
   },
 });

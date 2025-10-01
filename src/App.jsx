@@ -25,7 +25,7 @@ function App() {
             <Navbar />
 
             {/* Page content that expands */}
-            <Box sx={{ flexGrow: 1, mt: 2, px: 3 }}>
+            <Box sx={{ flexGrow: 1, mt: 2, px: 3 , minHeight:'90vh' }}>
               <AppRoutes />
             </Box>
 

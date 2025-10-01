@@ -1,69 +1,3 @@
-// // src/views/login/Login.component.jsx
-// import React from 'react';
-// import {
-//   Typography,
-//   TextField,
-//   Button,
-//   Box,
-//   Divider,
-// } from '@mui/material';
-// import GoogleIcon from '@mui/icons-material/Google';
-// import AuthWrapper from '../../components/authwrapper/Authwrapper';
-
-// const LoginComponent = ({
-//   formData,
-//   onChange,
-//   onSubmit,
-//   loading,
-//   error,
-//   user
-// }) => {
-//   return (
-//     <AuthWrapper>
-//       <Typography variant="h6">Login to Your Account</Typography>
-
-//       <TextField
-//         fullWidth
-//         label="Email"
-//         name="email"
-//         value={formData.email}
-//         onChange={onChange}
-//         variant="outlined"
-//         // margin="normal"
-//       />
-//       <TextField
-//         fullWidth
-//         label="Password"
-//         name="password"
-//         type="password"
-//         value={formData.password}
-//         onChange={onChange}
-//         variant="outlined"
-//         // margin="normal"
-//       />
-
-//       <Box width="100%" mt={2}>
-//         <Button fullWidth variant="contained" onClick={onSubmit} disabled={loading}>
-//           {loading ? 'Logging in...' : 'Login'}
-//         </Button>
-//       </Box>
-
-//       {error && <Typography color="error" mt={1}>{error}</Typography>}
-//       {user && <Typography color="success.main" mt={1}>Welcome {user?.email}</Typography>}
-
-//       <Divider sx={{ width: '100%', mt: 2, mb: 2 }}>or</Divider>
-
-//       <Button fullWidth variant="outlined" startIcon={<GoogleIcon />}>
-//         Login with Google
-//       </Button>
-//     </AuthWrapper>
-//   );
-// };
-
-// export default LoginComponent;
-
-
-
 import React, { useEffect, useState } from 'react';
 import {
   Typography,
@@ -95,7 +29,6 @@ const LoginComponent = ({
 }) => {
   const dispatch = useDispatch();
   const { status, message, error: resendError } = useSelector(state => state.verification);
-
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
@@ -135,7 +68,7 @@ const LoginComponent = ({
 
   const autofillFix = {
     '& input:-webkit-autofill': {
-      boxShadow: '0 0 0 1000px #000 inset',
+      boxShadow: '0 0 0 1000px #0f2437 inset',
       WebkitTextFillColor: '#fff',
       caretColor: '#fff'
     }
@@ -144,19 +77,21 @@ const LoginComponent = ({
   return (
     <AuthWrapper>
       <ToastContainer />
-
-      <Typography variant="h6" gutterBottom>
-        Login to Your Account
+      <Typography variant="h5" fontWeight={700} textAlign="center" mb={1} sx={{ color: '#fff' }}>
+        Sign in to your account
+      </Typography>
+      <Typography variant="body2" textAlign="center" mb={3} sx={{ color: '#fff' }}>
+        {/* Enter your credentials to access the SuperAdmin panel. */}
       </Typography>
 
       {error && unverifiedEmail && (
         <Box mt={1}>
-          <Typography variant="body2">
+          <Typography variant="body2" sx={{ color: '#fff' }}>
             <Button
               color="primary"
               size="small"
               onClick={handleOnResendVerification}
-              sx={{ ml: 1, textDecoration: 'underline' }}
+              sx={{ ml: 1, textDecoration: 'underline', color: '#fff' }}
             >
               Resend Verification Email
             </Button>
@@ -172,6 +107,26 @@ const LoginComponent = ({
         onChange={onChange}
         variant="outlined"
         margin="normal"
+        sx={{
+          '& .MuiOutlinedInput-root': {
+            color: '#fff',
+            '& fieldset': {
+              borderColor: '#fff',
+            },
+            '&:hover fieldset': {
+              borderColor: '#fff',
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: '#fff',
+            },
+          },
+          '& .MuiInputLabel-root': {
+            color: '#fff',
+            '&.Mui-focused': {
+              color: '#fff',
+            },
+          },
+        }}
         InputProps={{
           sx: {
             ...autofillFix
@@ -188,6 +143,26 @@ const LoginComponent = ({
         onChange={onChange}
         variant="outlined"
         margin="normal"
+        sx={{
+          '& .MuiOutlinedInput-root': {
+            color: '#fff',
+            '& fieldset': {
+              borderColor: '#fff',
+            },
+            '&:hover fieldset': {
+              borderColor: '#fff',
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: '#fff',
+            },
+          },
+          '& .MuiInputLabel-root': {
+            color: '#fff',
+            '&.Mui-focused': {
+              color: '#fff',
+            },
+          },
+        }}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
@@ -196,7 +171,7 @@ const LoginComponent = ({
                 onClick={togglePasswordVisibility}
                 edge="end"
                 size="small"
-                sx={{ color: '#ffffff' }}
+                sx={{ color: '#fff' }}
               >
                 {showPassword ? <VisibilityOff /> : <Visibility />}
               </IconButton>
@@ -208,36 +183,25 @@ const LoginComponent = ({
         }}
       />
 
-      <Box width="100%" mt={2}>
-        <Button fullWidth variant="contained" onClick={onSubmit} disabled={loading}>
-          {loading ? 'Logging in...' : 'Login'}
-        </Button>
-      </Box>
-
-      {/* <Box mt={1} textAlign="right">
-        <Link href="/forgot-password" underline="hover">
-          Forgot Password?
-        </Link>
-      </Box> */}
-
-      <Divider sx={{ width: '100%', mt: 1, mb: 1 }}>or</Divider>
-
-      {/* Uncomment this block to enable Google login */}
-      {/* 
-      <Button 
-        fullWidth 
-        variant="outlined" 
-        startIcon={<GoogleIcon />}
+      <Button
+        fullWidth
+        variant="contained"
+        size="large"
+        sx={{ mt: 2, mb: 1, fontWeight: 700, fontSize: '1.1rem', py: 1.2, borderRadius: 2 }}
+        onClick={onSubmit}
         disabled={loading}
       >
-        Login with Google
-      </Button> 
-      */}
+        {loading ? 'Logging in...' : 'Sign In'}
+      </Button>
 
-      <Box mt={2}>
-        <Typography variant="body2" color="#ffffff">
-          Don't have an account?{' '}
-          <Link href="/signup" underline="hover">
+      <Divider sx={{ width: '100%', my: 2, '&::before, &::after': { borderColor: '#fff' } }}>
+        <Typography sx={{ color: '#fff' }}>or</Typography>
+      </Divider>
+
+      <Box mt={2} width="100%" textAlign="center">
+        <Typography variant="body2" sx={{ color: '#fff' }}>
+          Don&apos;t have an account?{' '}
+          <Link href="/signup" underline="hover" sx={{ fontWeight: 600, color: '#fff' }}>
             Sign up
           </Link>
         </Typography>

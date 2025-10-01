@@ -17,7 +17,8 @@ import NotFound404 from '../views/NotFound/NotFound404';
 import Home from '../views/Home/HomePage';
 import { Public } from '@mui/icons-material';
 import PublicRoute from './PublicRoutes';
-
+import AdminDashboard from '../views/admindashboard/AdminDashboard.component';
+import DocumentContainer from '../views/document/document.container';
 
 
 const AppRoutes = () => {
@@ -26,9 +27,9 @@ const AppRoutes = () => {
       <Route path="/" element={<Home />} />
 
       <Route
-        path="/login" element={   <PublicRoute>     <LoginContainer />   </PublicRoute> } />
+        path="/login" element={<PublicRoute>     <LoginContainer />   </PublicRoute>} />
 
-      <Route path="/signup" element={   <PublicRoute>     <SignupContainer />   </PublicRoute> } />
+      <Route path="/signup" element={<PublicRoute>     <SignupContainer />   </PublicRoute>} />
       <Route path="/profile/user" element={<ProtectedRoute>  <ProfileContainer /> </ProtectedRoute>} />
       <Route path="/profile/admin" element={<ProtectedRoute>  <AdminProfileContainer />  </ProtectedRoute>} />
       <Route path="/users" element={<ProtectedRoute>  <TenantsContainer />  </ProtectedRoute>} />
@@ -36,6 +37,9 @@ const AppRoutes = () => {
       <Route path="/roles" element={<ProtectedRoute ><RoleContainer /></ProtectedRoute>} />
       <Route path="/logs" element={<ProtectedRoute ><LogContainer /></ProtectedRoute>} />
       <Route path="/dashboard" element={<ProtectedRoute><DashboardContainer /></ProtectedRoute>} />
+      <Route path="/admin-dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+      <Route path="/document" element={<ProtectedRoute><DocumentContainer /></ProtectedRoute>} />
+
       <Route path="*" element={<NotFound404 />} />
 
 

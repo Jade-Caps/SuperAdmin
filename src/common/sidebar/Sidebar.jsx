@@ -19,9 +19,12 @@ import {
     Settings,
     Logout,
     ExpandLess,
-    ExpandMore
+    ExpandMore,
+    DockOutlined,
+    DocumentScanner,
+    SupervisedUserCircleOutlined
 } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearLoginState } from '../../api/login/loginSlice';
 import { useTheme } from '@mui/material/styles';
@@ -40,6 +43,7 @@ const Sidebar = () => {
 
     const toggleDrawer = () => setOpen(!open);
     const toggleSettings = () => setSettingsOpen(!settingsOpen);
+    const location = useLocation();
 
     const handleLogout = () => {
         dispatch(clearLoginState());
@@ -53,6 +57,12 @@ const Sidebar = () => {
             label: 'Dashboard',
             icon: <Dashboard />,
             path: '/dashboard',
+            roles: ['admin', 'tenant']
+        },
+        {
+            label: 'Document',
+            icon: <DocumentScanner />,
+            path: '/document',
             roles: ['admin', 'tenant']
         },
         {
@@ -78,6 +88,7 @@ const Sidebar = () => {
     const getSettingsItems = (userType) => [
         {
             label: 'Profile',
+            icon: <SupervisedUserCircleOutlined />,
             path: userType === 'admin' ? '/profile/admin' : '/profile/user',
             roles: ['admin', 'tenant']
         },
@@ -100,11 +111,11 @@ const Sidebar = () => {
                     flexShrink: 0,
                     '& .MuiDrawer-paper': {
                         width: open ? drawerWidth : 60,
-                        backgroundColor: theme.palette.background.dark,
-                        color: theme.palette.text.primary,
+                        backgroundColor: theme.palette.background.nav,
+                        color: theme.palette.text.onNav,
                         transition: 'width 0.3s',
                         overflowX: 'hidden',
-                        borderRight: '1px solid rgba(255,255,255,0.1)'
+                        borderRight: '1px solid rgba(15,36,55,0.12)'
                     }
                 }}
             >
@@ -134,10 +145,31 @@ const Sidebar = () => {
                         .map((item) => (
                             <Tooltip key={item.label} title={!open ? item.label : ''} placement="right">
                                 <ListItem disablePadding>
-                                    <ListItemButton onClick={() => navigate(item.path)}>
+                                    <ListItemButton
+                                        onClick={() => navigate(item.path)}
+                                        selected={location.pathname === item.path}
+                                        sx={{
+                                            background: location.pathname === item.path
+                                                ? 'linear-gradient(135deg, #020e1bff, #0b635fff)' // 🔥 gradient for active item
+                                                : 'transparent',
+                                            color: location.pathname === item.path
+                                                ? '#fff'
+                                                : theme.palette.text.onNav,
+                                            '&:hover': {
+                                                backgroundColor: location.pathname === item.path
+                                                    ? 'linear-gradient(135deg, #0066dd, #00bfff)'
+                                                    : theme.palette.background.navHover,
+                                                color: theme.palette.text.onNav,
+                                            },
+                                            borderRadius: 2,
+                                            mx: 1,
+                                            my: 0.5
+                                        }}
+                                    >
+
                                         <ListItemIcon
                                             sx={{
-                                                color: 'inherit',
+                                                color: theme.palette.text.onNav,
                                                 minWidth: 0,
                                                 mr: open ? 2 : 'auto',
                                                 justifyContent: 'center'
@@ -156,10 +188,16 @@ const Sidebar = () => {
                         <>
                             <Tooltip title={!open ? 'Settings' : ''} placement="right">
                                 <ListItem disablePadding>
-                                    <ListItemButton onClick={toggleSettings}>
+                                    <ListItemButton onClick={toggleSettings}
+                                        sx={{
+                                            '&:hover': {
+                                                backgroundColor: theme.palette.background.navHover,
+                                                color: theme.palette.text.onNav,
+                                            },
+                                        }}>
                                         <ListItemIcon
                                             sx={{
-                                                color: 'inherit',
+                                                color: theme.palette.text.onNav,
                                                 minWidth: 0,
                                                 mr: open ? 2 : 'auto',
                                                 justifyContent: 'center'
@@ -180,7 +218,13 @@ const Sidebar = () => {
                                         .map((item) => (
                                             <ListItemButton
                                                 key={item.label}
-                                                sx={{ pl: open ? 4 : 2 }}
+                                                sx={{
+                                                    pl: open ? 4 : 2,
+                                                    '&:hover': {
+                                                        backgroundColor: theme.palette.background.navHover,
+                                                        color: theme.palette.text.onNav,
+                                                    },
+                                                }}
                                                 onClick={() => navigate(item.path)}
                                             >
                                                 <ListItemText primary={item.label} />
@@ -196,10 +240,16 @@ const Sidebar = () => {
                 <Divider sx={{ borderColor: 'rgba(255,255,255,0.1)', mt: 'auto' }} />
 
                 <ListItem disablePadding sx={{ mt: 1 }}>
-                    <ListItemButton onClick={handleLogout}>
+                    <ListItemButton onClick={handleLogout}
+                        sx={{
+                            '&:hover': {
+                                backgroundColor: theme.palette.background.navHover,
+                                color: theme.palette.text.onNav,
+                            },
+                        }}>
                         <ListItemIcon
                             sx={{
-                                color: 'inherit',
+                                color: theme.palette.text.onNav,
                                 minWidth: 0,
                                 mr: open ? 2 : 'auto',
                                 justifyContent: 'center'
