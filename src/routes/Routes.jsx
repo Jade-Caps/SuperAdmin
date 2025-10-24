@@ -19,6 +19,7 @@ import { Public } from '@mui/icons-material';
 import PublicRoute from './PublicRoutes';
 import AdminDashboard from '../views/admindashboard/AdminDashboard.component';
 import DocumentContainer from '../views/document/document.container';
+import FeedbackListContainer from '../views/feedback/FeedbackList.container';
 
 
 const AppRoutes = () => {
@@ -39,6 +40,7 @@ const AppRoutes = () => {
       <Route path="/dashboard" element={<ProtectedRoute><DashboardContainer /></ProtectedRoute>} />
       <Route path="/admin-dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
       <Route path="/document" element={<ProtectedRoute><DocumentContainer /></ProtectedRoute>} />
+      <Route path="/feedback" element={<ProtectedRoute><FeedbackListContainer /></ProtectedRoute>} />
 
       <Route path="*" element={<NotFound404 />} />
 

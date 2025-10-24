@@ -9,6 +9,7 @@ import tenantsReducer from '../api/allTenants/tenantSlice'
 import roleReducer from '../api/roles/roleSlice'
 import logReducer from '../api/logs/logSlice'
 import documentReducer from '../api/document/documentSlice'
+import feedbackReducer from '../api/feedback/feedbackSlice'
 
 
 export const store = configureStore({
@@ -21,6 +22,7 @@ export const store = configureStore({
     tenants : tenantsReducer,
     roles :roleReducer,
     logs : logReducer,
-    documents : documentReducer
+    documents : documentReducer,
+    feedback : feedbackReducer
   },
 });

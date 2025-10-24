@@ -30,6 +30,7 @@ import { clearLoginState } from '../../api/login/loginSlice';
 import { useTheme } from '@mui/material/styles';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import HistoryIcon from '@mui/icons-material/History';
+import FeedbackIcon from '@mui/icons-material/Feedback';
 
 const drawerWidth = 220;
 
@@ -81,6 +82,12 @@ const Sidebar = () => {
             label: 'Logs',
             icon: <HistoryIcon />,
             path: '/logs',
+            roles: ['admin']
+        },
+        {
+            label: 'Feedback',
+            icon: <FeedbackIcon />,
+            path: '/feedback',
             roles: ['admin']
         },
     ];

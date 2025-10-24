@@ -1,0 +1,183 @@
+[
+  {
+    "id": 1,
+    "name": "Dashboard",
+    "category": "Core",
+    "description": "Main dashboard and analytics"
+  },
+  {
+    "id": 2,
+    "name": "Property Management",
+    "category": "Core",
+    "description": "Property listing and management"
+  },
+  {
+    "id": 3,
+    "name": "Booking Management",
+    "category": "Core",
+    "description": "Booking creation and management"
+  },
+  {
+    "id": 4,
+    "name": "Booking Calendar",
+    "category": "Core",
+    "description": "Calendar view for bookings"
+  },
+  {
+    "id": 5,
+    "name": "Customer Management",
+    "category": "Core",
+    "description": "Customer data and profiles"
+  },
+  {
+    "id": 6,
+    "name": "Property Owner Management",
+    "category": "Core",
+    "description": "Property owner data and management"
+  },
+  {
+    "id": 7,
+    "name": "User & Roles",
+    "category": "Administration",
+    "description": "User management and role permissions"
+  },
+  {
+    "id": 8,
+    "name": "Sub Admin Management",
+    "category": "Administration",
+    "description": "Sub-admin user management"
+  },
+  {
+    "id": 9,
+    "name": "Coupon Management",
+    "category": "Marketing",
+    "description": "Discount coupons and promotions"
+  },
+  {
+    "id": 10,
+    "name": "Email Templates",
+    "category": "Communication",
+    "description": "Email template management"
+  },
+  {
+    "id": 11,
+    "name": "Guest Communication",
+    "category": "Communication",
+    "description": "Guest messaging and communication"
+  },
+  {
+    "id": 12,
+    "name": "Contact Us",
+    "category": "Communication",
+    "description": "Contact form submissions"
+  },
+  {
+    "id": 13,
+    "name": "Reports",
+    "category": "Analytics",
+    "description": "Booking, property, and owner reports"
+  },
+  {
+    "id": 14,
+    "name": "Inspection Report",
+    "category": "Operations",
+    "description": "Property inspection reports"
+  },
+  {
+    "id": 15,
+    "name": "Document Management",
+    "category": "Administration",
+    "description": "Document upload and management"
+  },
+  {
+    "id": 16,
+    "name": "Payment & Razorpay",
+    "category": "Finance",
+    "description": "Payment gateway integration"
+  },
+  {
+    "id": 17,
+    "name": "Channel Manager",
+    "category": "Integration",
+    "description": "Rental United integration"
+  },
+  {
+    "id": 18,
+    "name": "Master Data",
+    "category": "Configuration",
+    "description": "Countries, states, cities, amenities"
+  },
+  {
+    "id": 19,
+    "name": "Property Types",
+    "category": "Configuration",
+    "description": "Property type configuration"
+  },
+  {
+    "id": 20,
+    "name": "Amenities",
+    "category": "Configuration",
+    "description": "Property amenities management"
+  },
+  {
+    "id": 21,
+    "name": "Booking Status",
+    "category": "Configuration",
+    "description": "Booking status configuration"
+  },
+  {
+    "id": 22,
+    "name": "Pages & FAQ",
+    "category": "Content",
+    "description": "Content pages and FAQ management"
+  },
+  {
+    "id": 23,
+    "name": "List Property Form",
+    "category": "Operations",
+    "description": "Property listing form submissions"
+  },
+  {
+    "id": 24,
+    "name": "Audit Logs",
+    "category": "Administration",
+    "description": "System audit logs"
+  },
+  {
+    "id": 25,
+    "name": "Release Notes",
+    "category": "System",
+    "description": "Release notes and updates"
+  },
+  {
+    "id": 26,
+    "name": "Login & Authentication",
+    "category": "System",
+    "description": "Login and authentication system"
+  },
+  {
+    "id": 27,
+    "name": "Profile Settings",
+    "category": "Account",
+    "description": "User profile and settings"
+  },
+  {
+    "id": 28,
+    "name": "AI Assistant",
+    "category": "AI",
+    "description": "AI-powered assistant features"
+  },
+  {
+    "id": 29,
+    "name": "Property Relations",
+    "category": "Core",
+    "description": "Property relationships and grouping"
+  },
+  {
+    "id": 30,
+    "name": "Other",
+    "category": "General",
+    "description": "Other features not listed"
+  }
+]
+
